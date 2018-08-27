@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  UserListViewController.swift
 //  UserListApp
 //
 //  Created by max kruchkov on 8/27/18.
@@ -18,7 +18,7 @@ class HeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var cellUserPic: UIImageView!
 }
 
-class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var usersTable: UITableView!
     
@@ -67,7 +67,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
             headlineCell.cellUserPhone?.text = users[indexPath.row].phone
             
             if let picUrl = URL(string: users[indexPath.row].picUrl) {
-                self.getDataFromUrl(url: picUrl) { data, response, error in
+                UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
                     guard let data = data, error == nil else { return }
                     DispatchQueue.main.async() {
                         headlineCell.cellUserPic?.image = UIImage(data: data)
@@ -84,19 +84,4 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    fileprivate func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-            }.resume()
-    }
-}
-
-extension String {
-    func capitalizingFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst()
-    }
-    
-    mutating func capitalizeFirstLetter() {
-        self = self.capitalizingFirstLetter()
-    }
 }
