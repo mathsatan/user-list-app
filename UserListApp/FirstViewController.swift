@@ -22,12 +22,13 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var usersTable: UITableView!
     
-    var realm : Realm!
+    //var realm : Realm!
     var users: [UserContact] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         obtainUsers()
+        //realm = try! Realm()
     }
     
     func obtainUsers() {
@@ -43,8 +44,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
                     currentUser.email = user["email"].stringValue
                     currentUser.phone = user["phone"].stringValue
                     currentUser.picUrl = user["picture"]["thumbnail"].stringValue
-                    currentUser.firstName = user["name"]["first"].stringValue
-                    currentUser.lastName = user["name"]["last"].stringValue
+                    currentUser.firstName = user["name"]["first"].stringValue.capitalizingFirstLetter()
+                    currentUser.lastName = user["name"]["last"].stringValue.capitalizingFirstLetter()
                     self.users.append(currentUser)
                 }
                 self.usersTable.reloadData()
@@ -54,7 +55,6 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,5 +88,15 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         URLSession.shared.dataTask(with: url) { data, response, error in
             completion(data, response, error)
             }.resume()
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }
