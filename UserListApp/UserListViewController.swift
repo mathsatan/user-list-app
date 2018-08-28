@@ -44,7 +44,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
                     let currentUser = UserContact()
                     currentUser.email = user["email"].stringValue
                     currentUser.phone = user["phone"].stringValue
-                    currentUser.picUrl = user["picture"]["thumbnail"].stringValue
+                    currentUser.picUrl = user["picture"]["large"].stringValue
                     currentUser.firstName = user["name"]["first"].stringValue.capitalizingFirstLetter()
                     currentUser.lastName = user["name"]["last"].stringValue.capitalizingFirstLetter()
                     self.users.append(currentUser)
