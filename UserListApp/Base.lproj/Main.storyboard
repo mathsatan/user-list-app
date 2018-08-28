@@ -111,7 +111,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Users" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Users" image="tab_users_active" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="usersTable" destination="P7z-o9-dVV" id="G4G-kt-rpX"/>
                         <segue destination="FUC-88-Vzo" kind="show" identifier="edit_user_segue" id="lyr-nh-iyS"/>
@@ -346,7 +346,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Saved" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Saved" image="tab_saved" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="savedUsersTable" destination="Agx-o4-JcX" id="cdR-lH-jOx"/>
                         <segue destination="FUC-88-Vzo" kind="show" identifier="edit_saved_contact" id="oIo-xj-Oa0"/>
@@ -377,8 +377,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="tab_saved" width="28" height="26"/>
+        <image name="tab_users_active" width="34" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oIo-xj-Oa0"/>
