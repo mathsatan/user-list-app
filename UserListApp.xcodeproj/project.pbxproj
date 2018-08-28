@@ -18,6 +18,7 @@
 		501D1AA32134138A00EBBF0D /* UserListAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1AA22134138A00EBBF0D /* UserListAppTests.swift */; };
 		501D1AAE2134138A00EBBF0D /* UserListAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1AAD2134138A00EBBF0D /* UserListAppUITests.swift */; };
 		501D1ABC213416BB00EBBF0D /* UserContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1ABB213416BB00EBBF0D /* UserContact.swift */; };
+		503769C8213582C100D4115F /* UserTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503769C7213582C100D4115F /* UserTabBarController.swift */; };
 		72FD09E7199D38275B03E191 /* Pods_UserListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618C19F56A29E138226C85A6 /* Pods_UserListApp.framework */; };
 		95D2C8A90FC007D2209D23DB /* Pods_UserListAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1D29A08EB28CF4E47F6E52 /* Pods_UserListAppUITests.framework */; };
 		ECE7CD85B592592366E8E9E5 /* Pods_UserListAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBAD1950CE3CBC44BD2AD8FD /* Pods_UserListAppTests.framework */; };
@@ -60,6 +61,7 @@
 		501D1AAD2134138A00EBBF0D /* UserListAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListAppUITests.swift; sourceTree = "<group>"; };
 		501D1AAF2134138A00EBBF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		501D1ABB213416BB00EBBF0D /* UserContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContact.swift; sourceTree = "<group>"; };
+		503769C7213582C100D4115F /* UserTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabBarController.swift; sourceTree = "<group>"; };
 		515D315481B20F530210E43E /* Pods-UserListAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserListAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UserListAppTests/Pods-UserListAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A386E7F8424875312B39210 /* Pods-UserListAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserListAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UserListAppUITests/Pods-UserListAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		618C19F56A29E138226C85A6 /* Pods_UserListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 				501D1A8D2134138900EBBF0D /* UserListViewController.swift */,
 				501D1A8F2134138900EBBF0D /* SavedUsersViewController.swift */,
 				5017E8C72134AD0900034B9C /* EditProfileViewController.swift */,
+				503769C7213582C100D4115F /* UserTabBarController.swift */,
 				501D1A912134138900EBBF0D /* Main.storyboard */,
 				501D1A942134138A00EBBF0D /* Assets.xcassets */,
 				501D1A962134138A00EBBF0D /* LaunchScreen.storyboard */,
@@ -397,6 +400,7 @@
 				501D1A902134138900EBBF0D /* SavedUsersViewController.swift in Sources */,
 				5017E8C82134AD0900034B9C /* EditProfileViewController.swift in Sources */,
 				501D1A8C2134138900EBBF0D /* AppDelegate.swift in Sources */,
+				503769C8213582C100D4115F /* UserTabBarController.swift in Sources */,
 				501D1A8E2134138900EBBF0D /* UserListViewController.swift in Sources */,
 				501D1ABC213416BB00EBBF0D /* UserContact.swift in Sources */,
 			);

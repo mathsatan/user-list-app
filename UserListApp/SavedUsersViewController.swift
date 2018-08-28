@@ -79,4 +79,17 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
             self.savedUsersTable.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? EditProfileViewController {
+            vc.selectedContact = selectedUser
+        }
+    }
+    
+    private var selectedUser = UserContact()
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedUser = savedUsers[indexPath.row]
+        self.performSegue(withIdentifier: "edit_saved_contact", sender: selectedUser)
+    }
 }

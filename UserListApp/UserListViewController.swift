@@ -85,4 +85,17 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? EditProfileViewController {
+            vc.selectedContact = self.selectedUser
+        }
+    }
+    
+    private var selectedUser = UserContact()
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedUser = users[indexPath.row]
+        self.performSegue(withIdentifier: "edit_user_segue", sender: selectedUser)
+    }
+    
 }
