@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var cellUserPic: UIImageView!
@@ -18,27 +19,18 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var savedUsersTable: UITableView!
     
-    var savedUsers: [UserContact] = []
+    var realm: Realm!
+    
+    var savedUsers: Results<UserContact> {
+        get {
+            return realm.objects(UserContact.self)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let user1 = UserContact()
-        user1.email = "asd@asd.com"
-        user1.phone = "0664787366"
-        user1.picUrl = "https://www.shareicon.net/data/48x48/2015/09/18/103160_man_512x512.png"
-        user1.firstName = "Max"
-        user1.lastName = "Kruchkov"
-        
-        let user2 = UserContact()
-        user2.email = "asd2@asd.com"
-        user2.phone = "0671094822"
-        user2.picUrl = "https://www.shareicon.net/data/48x48/2015/09/18/103160_man_512x512.png"
-        user2.firstName = "Miha"
-        user2.lastName = "Nazarenko"
-        savedUsers.append(user1)
-        savedUsers.append(user2)
-        // Do any additional setup after loading the view, typically from a nib.
+        realm = try! Realm()
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +67,11 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.savedUsers.remove(at: indexPath.row)
+            let item = savedUsers[indexPath.row]
+            try! self.realm.write({
+                self.realm.delete(item)
+            })
+            
             self.savedUsersTable.deleteRows(at: [indexPath], with: .fade)
         }
     }

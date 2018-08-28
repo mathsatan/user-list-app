@@ -16,7 +16,7 @@ class UserListUtil {
     }
 }
 
-// For comfortable capitalize for contacts
+    // For comfortable capitalize for contacts
 extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()

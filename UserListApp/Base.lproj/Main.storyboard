@@ -238,6 +238,7 @@
                     </view>
                     <connections>
                         <outlet property="profilePic" destination="A8X-1c-a6U" id="v9d-D9-FCx"/>
+                        <outlet property="tableUserInfo" destination="ElB-Kz-PT2" id="ReS-Pk-h5s"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="from_edit_to_main" id="xds-AT-78o"/>
                     </connections>
                 </viewController>

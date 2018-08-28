@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import Alamofire
 import SwiftyJSON
 
@@ -21,7 +20,6 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet weak var usersTable: UITableView!
     
-    //var realm : Realm!
     var users: [UserContact] = []
     let fetchUserNumber = 5
     let pageNumber = 1
@@ -29,7 +27,6 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         obtainUsers()
-        //realm = try! Realm()
     }
     
     func obtainUsers() {
@@ -42,6 +39,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
             if let val = response.result.value, let userData = JSON(rawValue: val) {
                 for (_, user) in userData["results"] {
                     let currentUser = UserContact()
+                    currentUser.userId = user["login"]["uuid"].stringValue
                     currentUser.email = user["email"].stringValue
                     currentUser.phone = user["phone"].stringValue
                     currentUser.picUrl = user["picture"]["large"].stringValue

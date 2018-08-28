@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 class UserContact: Object {
+    @objc dynamic var userId: String = ""
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var email: String = ""
