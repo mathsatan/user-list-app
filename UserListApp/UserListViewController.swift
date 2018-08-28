@@ -21,12 +21,14 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var usersTable: UITableView!
     
     var users: [UserContact] = []
-    let fetchUserNumber = 5
-    let pageNumber = 1
+    let fetchUserNumber = 10
+    var pageNumber = 0
+    let totalEntries = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()
         obtainUsers()
+        self.usersTable.reloadData()
     }
     
     func obtainUsers() {
@@ -47,7 +49,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
                     currentUser.lastName = user["name"]["last"].stringValue.capitalizingFirstLetter()
                     self.users.append(currentUser)
                 }
-                self.usersTable.reloadData()
+                self.perform(#selector(self.reloadUserList), with: nil, afterDelay: 1.0)
             }
         }
     }
@@ -94,6 +96,17 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedUser = users[indexPath.row]
         self.performSegue(withIdentifier: "edit_user_segue", sender: selectedUser)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == users.count - 1 && users.count < totalEntries {
+            pageNumber = pageNumber + 1
+            obtainUsers()
+        }
+    }
+    
+    @objc func reloadUserList() {
+        self.usersTable.reloadData()
     }
     
 }
