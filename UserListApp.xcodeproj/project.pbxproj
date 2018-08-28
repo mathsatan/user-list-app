@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5017E8C621349FBC00034B9C /* UserListUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5017E8C521349FBC00034B9C /* UserListUtil.swift */; };
+		5017E8C82134AD0900034B9C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5017E8C72134AD0900034B9C /* EditProfileViewController.swift */; };
 		501D1A8C2134138900EBBF0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1A8B2134138900EBBF0D /* AppDelegate.swift */; };
 		501D1A8E2134138900EBBF0D /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1A8D2134138900EBBF0D /* UserListViewController.swift */; };
 		501D1A902134138900EBBF0D /* SavedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D1A8F2134138900EBBF0D /* SavedUsersViewController.swift */; };
@@ -43,6 +44,7 @@
 		3E1D29A08EB28CF4E47F6E52 /* Pods_UserListAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserListAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF3B1BE08E3DC2F38137248 /* Pods-UserListAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserListAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserListAppUITests/Pods-UserListAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5017E8C521349FBC00034B9C /* UserListUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListUtil.swift; sourceTree = "<group>"; };
+		5017E8C72134AD0900034B9C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		501D1A882134138900EBBF0D /* UserListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		501D1A8B2134138900EBBF0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		501D1A8D2134138900EBBF0D /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				501D1A8B2134138900EBBF0D /* AppDelegate.swift */,
 				501D1A8D2134138900EBBF0D /* UserListViewController.swift */,
 				501D1A8F2134138900EBBF0D /* SavedUsersViewController.swift */,
+				5017E8C72134AD0900034B9C /* EditProfileViewController.swift */,
 				501D1A912134138900EBBF0D /* Main.storyboard */,
 				501D1A942134138A00EBBF0D /* Assets.xcassets */,
 				501D1A962134138A00EBBF0D /* LaunchScreen.storyboard */,
@@ -392,6 +395,7 @@
 			files = (
 				5017E8C621349FBC00034B9C /* UserListUtil.swift in Sources */,
 				501D1A902134138900EBBF0D /* SavedUsersViewController.swift in Sources */,
+				5017E8C82134AD0900034B9C /* EditProfileViewController.swift in Sources */,
 				501D1A8C2134138900EBBF0D /* AppDelegate.swift in Sources */,
 				501D1A8E2134138900EBBF0D /* UserListViewController.swift in Sources */,
 				501D1ABC213416BB00EBBF0D /* UserContact.swift in Sources */,

@@ -12,7 +12,6 @@ import Alamofire
 import SwiftyJSON
 
 class HeadlineTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var cellUserName: UILabel!
     @IBOutlet weak var cellUserPhone: UILabel!
     @IBOutlet weak var cellUserPic: UIImageView!
@@ -24,6 +23,8 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //var realm : Realm!
     var users: [UserContact] = []
+    let fetchUserNumber = 5
+    let pageNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func obtainUsers() {
-        Alamofire.request("https://randomuser.me/api/?results=3", method: .get).responseJSON { response in
+        Alamofire.request("https://randomuser.me/api/?page=\(pageNumber)&results=\(fetchUserNumber)", method: .get).responseJSON { response in
             guard response.result.isSuccess else {
                 print("Error has occured while fetching users data \(String(describing: response.result.error))")
                 return

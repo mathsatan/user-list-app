@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -111,6 +112,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="7eV-WW-Rt4">
+            <objects>
+                <viewController id="FUC-88-Vzo" customClass="EditProfileViewController" customModule="UserListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AoS-Ur-39e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F8R-Vz-GhF">
+                                <rect key="frame" x="2" y="22" width="371" height="643"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQn-mD-M7f">
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="238"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8X-1c-a6U">
+                                                <rect key="frame" x="20" y="8" width="331" height="166"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.85711850860000005" green="1" blue="0.93358552449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="A8X-1c-a6U" secondAttribute="trailing" constant="20" id="6BI-ex-FhH"/>
+                                            <constraint firstItem="A8X-1c-a6U" firstAttribute="top" secondItem="NQn-mD-M7f" secondAttribute="top" constant="8" id="E1S-W7-v1k"/>
+                                            <constraint firstItem="A8X-1c-a6U" firstAttribute="leading" secondItem="NQn-mD-M7f" secondAttribute="leading" constant="20" id="R3R-iy-NDr"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7q-iI-lCF">
+                                        <rect key="frame" x="0.0" y="238" width="371" height="405"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="V7q-iI-lCF" firstAttribute="height" secondItem="NQn-mD-M7f" secondAttribute="height" multiplier="1.7" id="0vy-5w-cZp"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2O4-4C-zIr" firstAttribute="trailing" secondItem="F8R-Vz-GhF" secondAttribute="trailing" constant="2" id="Sqp-bj-uQ7"/>
+                            <constraint firstItem="F8R-Vz-GhF" firstAttribute="leading" secondItem="2O4-4C-zIr" secondAttribute="leading" constant="2" id="bEF-yw-nGf"/>
+                            <constraint firstItem="F8R-Vz-GhF" firstAttribute="top" secondItem="2O4-4C-zIr" secondAttribute="top" constant="2" id="c6s-IP-A9V"/>
+                            <constraint firstItem="2O4-4C-zIr" firstAttribute="bottom" secondItem="F8R-Vz-GhF" secondAttribute="bottom" constant="2" id="sDE-KI-9ku"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2O4-4C-zIr"/>
+                    </view>
+                    <connections>
+                        <outlet property="profilePic" destination="A8X-1c-a6U" id="v9d-D9-FCx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfZ-dy-xAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1650.4000000000001" y="-41.829085457271368"/>
         </scene>
         <!--Saved-->
         <scene sceneID="wg7-f3-ORb">
