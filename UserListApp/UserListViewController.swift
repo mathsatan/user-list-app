@@ -67,6 +67,9 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
             headlineCell.cellUserName?.text = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
             headlineCell.cellUserPhone?.text = users[indexPath.row].phone
             
+            headlineCell.cellUserPic.layer.cornerRadius = headlineCell.cellUserPic.frame.size.width / 2.0
+            headlineCell.cellUserPic.clipsToBounds = true
+            
             if let picUrl = URL(string: users[indexPath.row].picUrl) {
                 UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
                     guard let data = data, error == nil else { return }
@@ -103,6 +106,10 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
             pageNumber = pageNumber + 1
             obtainUsers()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     @objc func reloadUserList() {
