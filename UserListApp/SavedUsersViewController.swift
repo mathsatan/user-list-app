@@ -47,6 +47,9 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
             headlineCell.cellUserName?.text = savedUsers[indexPath.row].firstName + " " + savedUsers[indexPath.row].lastName
             headlineCell.cellUserPhone?.text = savedUsers[indexPath.row].phone
             
+            headlineCell.cellUserPic.layer.cornerRadius = headlineCell.cellUserPic.frame.size.width / 2.0
+            headlineCell.cellUserPic.clipsToBounds = true
+            
             if let picUrl = URL(string: savedUsers[indexPath.row].picUrl) {
                 UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
                     guard let data = data, error == nil else { return }
