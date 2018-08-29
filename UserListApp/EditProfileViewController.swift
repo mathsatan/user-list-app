@@ -62,11 +62,11 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let message: String
         let row: Int
     }
+    
     var inputError: InputError?
-    
-    var realm: Realm!
-    
-    var userContactList: Results<UserContact> {
+    private var oldCustomPic = ""
+    private var realm: Realm!
+    private var userContactList: Results<UserContact> {
         get {
             return realm.objects(UserContact.self)
         }
@@ -93,9 +93,8 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    private var oldCustomPic = ""
     
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             let imageData = UIImageJPEGRepresentation(image, 0.6)
             if let imgData = imageData {
@@ -118,12 +117,15 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.present(alert, animated: true)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBOutlet weak var profilePic: UIImageView!
     var selectedContact = UserContact()
     var tabIndex = 0
     let infoCount = 4
     let userInfoLabels = ["First name", "Last name", "Email", "Phone"]
-    
     @IBOutlet weak var tableUserInfo: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
