@@ -16,4 +16,5 @@ class UserContact: Object {
     @objc dynamic var email: String = ""
     @objc dynamic var phone: String = ""
     @objc dynamic var picUrl: String = ""
+    @objc dynamic var customPic: String = ""
 }

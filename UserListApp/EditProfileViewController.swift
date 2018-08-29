@@ -57,7 +57,7 @@ class EditableTableViewCell: UITableViewCell {
     }
 }
 
-class EditProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EditProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     struct InputError {
         let message: String
         let row: Int
@@ -70,6 +70,49 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         get {
             return realm.objects(UserContact.self)
         }
+    }
+    
+    @IBAction func changePhotoFromLibrary(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true) {
+            }
+        }
+    }
+    
+    @IBAction func changePhotoFromCamera(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            let imageData = UIImageJPEGRepresentation(image, 0.6)
+            if let imgData = imageData {
+                let compressedJPGImage = UIImage(data: imgData)
+                self.profilePic.image = compressedJPGImage
+                try! self.realm.write({
+                    self.selectedContact.customPic = UUID().uuidString + ".png"
+                })
+            }
+        } else {
+            self.errorAlert(msg: "Image load error")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func errorAlert(msg: String) {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @IBOutlet weak var profilePic: UIImageView!
@@ -156,9 +199,7 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if let error = self.inputError {
-            let alert = UIAlertController(title: "Input error", message: error.message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            self.errorAlert(msg: error.message)
             return
         }
         
@@ -175,11 +216,17 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profilePic.layer.cornerRadius = profilePic.frame.size.width / 2.0
         self.profilePic.clipsToBounds = true
         
-        if let picUrl = URL(string: selectedContact.picUrl) {
-            UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
-                guard let data = data, error == nil else { print("Error has occured: " + error.debugDescription); return }
-                DispatchQueue.main.async() {
-                    self.profilePic.image = UIImage(data: data)
+        if !selectedContact.customPic.isEmpty {
+            if let customImage = UserListUtil.getSavedImage(named: selectedContact.customPic) {
+                self.profilePic.image = customImage
+            }
+        } else {
+            if let picUrl = URL(string: selectedContact.picUrl) {
+                UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
+                    guard let data = data, error == nil else { print("Error has occured: " + error.debugDescription); return }
+                    DispatchQueue.main.async() {
+                        self.profilePic.image = UIImage(data: data)
+                    }
                 }
             }
         }
@@ -211,6 +258,12 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 if !newPhone.isEmpty { selectedContact.phone = newPhone }
                 self.realm.add(selectedContact)
             })
+        }
+            // save image if need
+        if !self.selectedContact.customPic.isEmpty {
+            if let imageForSave = self.profilePic.image {
+                UserListUtil.saveImage(image: imageForSave, fileName: self.selectedContact.customPic)
+            }
         }
     }
 }

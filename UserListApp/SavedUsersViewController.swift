@@ -49,12 +49,17 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
             
             headlineCell.cellUserPic.layer.cornerRadius = headlineCell.cellUserPic.frame.size.width / 2.0
             headlineCell.cellUserPic.clipsToBounds = true
-            
-            if let picUrl = URL(string: savedUsers[indexPath.row].picUrl) {
-                UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
-                    guard let data = data, error == nil else { return }
-                    DispatchQueue.main.async() {
-                        headlineCell.cellUserPic?.image = UIImage(data: data)
+            if !savedUsers[indexPath.row].customPic.isEmpty {
+                if let customImage = UserListUtil.getSavedImage(named: savedUsers[indexPath.row].customPic) {
+                    headlineCell.cellUserPic?.image = customImage
+                }
+            } else {
+                if let picUrl = URL(string: savedUsers[indexPath.row].picUrl) {
+                    UserListUtil.getDataFromUrl(url: picUrl) { data, response, error in
+                        guard let data = data, error == nil else { return }
+                        DispatchQueue.main.async() {
+                            headlineCell.cellUserPic?.image = UIImage(data: data)
+                        }
                     }
                 }
             }
