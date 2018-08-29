@@ -93,6 +93,8 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    private var oldCustomPic = ""
+    
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             let imageData = UIImageJPEGRepresentation(image, 0.6)
@@ -100,6 +102,7 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 let compressedJPGImage = UIImage(data: imgData)
                 self.profilePic.image = compressedJPGImage
                 try! self.realm.write({
+                    if self.oldCustomPic.isEmpty { self.oldCustomPic = self.selectedContact.customPic }
                     self.selectedContact.customPic = UUID().uuidString + ".png"
                 })
             }
@@ -259,10 +262,13 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 self.realm.add(selectedContact)
             })
         }
-            // save image if need
+        
         if !self.selectedContact.customPic.isEmpty {
             if let imageForSave = self.profilePic.image {
-                UserListUtil.saveImage(image: imageForSave, fileName: self.selectedContact.customPic)
+                let isSaveSuccess = UserListUtil.saveImage(image: imageForSave, fileName: self.selectedContact.customPic)
+                if isSaveSuccess && !self.oldCustomPic.isEmpty {
+                    UserListUtil.deleteImage(fileName: self.oldCustomPic)
+                }
             }
         }
     }

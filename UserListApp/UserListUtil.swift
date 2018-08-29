@@ -23,11 +23,26 @@ class UserListUtil {
             return false
         }
         do {
-            try data.write(to: directory.appendingPathComponent(fileName)!)
-            return true
+            if let filePath = directory.appendingPathComponent(fileName) {
+                try data.write(to: filePath)
+                return true
+            }
         } catch {
             print(error.localizedDescription)
-            return false
+        }
+        return false
+    }
+    
+    static func deleteImage(fileName: String) {
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return
+        }
+        if let filePath = directory.appendingPathComponent(fileName) {
+            do {
+                try FileManager.default.removeItem(at: filePath)
+            } catch {
+                print("Error has occured while deleting file")
+            }
         }
     }
     

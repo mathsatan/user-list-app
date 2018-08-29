@@ -76,10 +76,14 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let item = savedUsers[indexPath.row]
+            
+            if !item.customPic.isEmpty {
+                UserListUtil.deleteImage(fileName: item.customPic)
+            }
+            
             try! self.realm.write({
                 self.realm.delete(item)
             })
-            
             self.savedUsersTable.deleteRows(at: [indexPath], with: .fade)
         }
     }
