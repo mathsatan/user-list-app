@@ -27,6 +27,24 @@ class EditableTableViewCell: UITableViewCell {
                     }
                 }
             }
+            if row == 2 {
+                if let newText = self.infoValue?.text {
+                    if !InputValidator.email(newText) {
+                        sender.layer.borderColor = UIColor.red.cgColor
+                        sender.layer.borderWidth = 1
+                        ownVC?.inputError = EditProfileViewController.InputError(message: "Email is incorrect", row: row)
+                    }
+                }
+            }
+            if row == 3 {
+                if let newText = self.infoValue?.text {
+                    if !InputValidator.phone(newText) {
+                        sender.layer.borderColor = UIColor.red.cgColor
+                        sender.layer.borderWidth = 1
+                        ownVC?.inputError = EditProfileViewController.InputError(message: "Phone is incorrect", row: row)
+                    }
+                }
+            }
         }
         
         sender.textColor = UIColor.gray
@@ -187,6 +205,10 @@ class EditProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
         } else {
             try! self.realm.write({
+                if !newFirstName.isEmpty { selectedContact.firstName = newFirstName }
+                if !newLastName.isEmpty { selectedContact.lastName = newLastName }
+                if !newEmail.isEmpty { selectedContact.email = newEmail }
+                if !newPhone.isEmpty { selectedContact.phone = newPhone }
                 self.realm.add(selectedContact)
             })
         }
@@ -200,11 +222,23 @@ fileprivate class InputValidator {
     }
     
     static func email(_ email: String) -> Bool {
-        return true
+        let emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}" +
+        "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" +
+        "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-" +
+        "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5" +
+        "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-" +
+        "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21" +
+        "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+        
+        let emailTest = NSPredicate(format: "SELF MATCHES[c] %@", emailRegEx)
+        return emailTest.evaluate(with: email)
     }
     
     static func phone(_ phone: String) -> Bool {
-        return true
+        let PHONE_REGEX = "((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result = phoneTest.evaluate(with: phone)
+        return result
     }
 }
 
