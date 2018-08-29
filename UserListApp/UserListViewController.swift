@@ -28,7 +28,6 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         obtainUsers()
-        self.usersTable.reloadData()
     }
     
     func obtainUsers() {
@@ -109,11 +108,10 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        return UserListUtil.rowHeight
     }
     
     @objc func reloadUserList() {
         self.usersTable.reloadData()
     }
-    
 }

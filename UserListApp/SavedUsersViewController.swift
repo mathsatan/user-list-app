@@ -84,6 +84,10 @@ class SavedUsersViewController: UIViewController, UITableViewDataSource, UITable
     
     private var selectedUser = UserContact()
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UserListUtil.rowHeight
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUser = savedUsers[indexPath.row]
         self.performSegue(withIdentifier: "edit_saved_contact", sender: selectedUser)

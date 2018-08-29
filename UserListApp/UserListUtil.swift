@@ -6,7 +6,7 @@
 //  Copyright © 2018 max kruchkov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UserListUtil {
     static func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -14,6 +14,8 @@ class UserListUtil {
             completion(data, response, error)
             }.resume()
     }
+    
+    static let rowHeight: CGFloat = 60.0
 }
 
     // For comfortable capitalize for contacts
